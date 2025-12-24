@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment{
-        Mode = credentials('MODE')
+        MY_MODE = credentials('MODE')
     }
 
     tools {
@@ -27,7 +27,7 @@ pipeline {
 
         stage('ENV File Creation') {
             steps {
-             bat "@echo mode=%Mode% > .env"
+             bat "@echo mode=%MY_MODE% > .env"
             }
         }
 
