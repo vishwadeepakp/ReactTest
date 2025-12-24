@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment{
+        Mode = credentials('MODE')
+    }
+
     tools {
         nodejs 'node25' 
     }
@@ -18,6 +22,12 @@ pipeline {
                 echo 'Installing packages...'
                 // विंडोज के लिए 'bat', लिनक्स के लिए 'sh' का प्रयोग करें
                 bat 'npm install'
+            }
+        }
+
+        stage('ENV File Creation') {
+            steps {
+             bat "@echo mode=%Mode% > .env"
             }
         }
 
